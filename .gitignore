@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.agentlens/
+*.tsbuildinfo
+.DS_Store
