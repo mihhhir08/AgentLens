@@ -19,10 +19,10 @@ export function list(cwd: string): void {
     return;
   }
   console.log(
-    pad("ID", 36) +
-      pad("BRANCH", 16) +
-      pad("STARTED", 22) +
-      pad("DURATION", 10) +
+    pad("ID", 32) +
+      pad("BRANCH", 14) +
+      pad("STARTED", 26) +
+      pad("DURATION", 12) +
       pad("CMDS", 6) +
       pad("FILES", 6) +
       "RISK",
@@ -34,16 +34,16 @@ export function list(cwd: string): void {
         ? new Date(r.endTime).getTime() - new Date(r.startTime).getTime()
         : 0;
       console.log(
-        pad(r.id, 36) +
-          pad(r.branch || "—", 16) +
-          pad(r.startTime, 22) +
-          pad(formatDuration(dur), 10) +
+        pad(r.id, 32) +
+          pad(r.branch || "—", 14) +
+          pad(r.startTime, 26) +
+          pad(formatDuration(dur), 12) +
           pad(String(r.commands.length), 6) +
           pad(String(r.changedFiles.length), 6) +
           highest(r.risks.map((x) => x.level)),
       );
     } catch {
-      console.log(pad(id, 36) + "(unreadable)");
+      console.log(pad(id, 32) + "(unreadable)");
     }
   }
 }

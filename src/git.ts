@@ -102,6 +102,8 @@ export function parseChangedFilesFromStatus(statusShort: string): ChangedFile[] 
       const parts = path.split(" -> ");
       path = parts[parts.length - 1]?.trim() ?? path;
     }
+    // Hide AgentLens's own working directory from the changed-files view.
+    if (path === ".agentlens" || path === ".agentlens/" || path.startsWith(".agentlens/")) continue;
     let code: ChangedFileStatus = "M";
     const s = xy.replace(" ", "");
     if (s.includes("?")) code = "?";
