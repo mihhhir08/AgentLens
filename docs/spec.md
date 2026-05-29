@@ -389,13 +389,13 @@ agentlens/
   .gitignore
 ```
 
-Modules under `core/` are pure (no I/O). Side-effect modules (`git.ts`, `storage.ts`, `commands/*`) are thin wrappers around them.
+Modules under `core/` are pure transformations on the `AgentLensRun` model — with one exception: `core/storage.ts` performs atomic JSON file I/O. It is organized as pure `serialize` / `deserialize` helpers plus thin I/O wrappers (`readRun`, `writeRun`, `readActive`, `writeActive`, `clearActive`); only the pure helpers are unit-tested directly, with the I/O wrappers exercised via a tmp directory round-trip. Other side-effect modules (`git.ts`, `commands/*`) are thin wrappers around `core/`.
 
 ---
 
 ## 11. Testing strategy
 
-Unit tests for pure logic only — `risks`, `summary`, `report`, `time`, `storage` round-trip.
+Unit tests for the pure layer — `risks`, `summary`, `report`, `time`, and the `serialize` / `deserialize` helpers in `storage`. The `storage` I/O wrappers are exercised by a single round-trip test against a tmp directory.
 
 - `risks.test.ts` — fixtures for each rule (env touched, lockfile, large diff, many failures), and "no risks" path.
 - `summary.test.ts` — markdown for full run, empty-state branches (no commands, no changes, no risks).
