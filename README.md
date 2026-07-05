@@ -7,6 +7,8 @@ AgentLens records an AI coding-agent session and generates a polished local HTML
 
 No cloud. No backend. No telemetry. Just a `.agentlens/` directory in your project.
 
+![AgentLens demo](assets/demo.gif)
+
 ---
 
 ## Why this exists
