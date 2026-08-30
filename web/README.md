@@ -7,23 +7,26 @@ is part of `npm run build`. Editing the page cannot break the tool.
 
 ## Deploy to Vercel
 
-Import this repository at [vercel.com/new](https://vercel.com/new) and set:
+Import this repository at [vercel.com/new](https://vercel.com/new) and accept the defaults.
+The `vercel.json` at the repo root does the configuration:
 
-| Setting | Value |
-| --- | --- |
-| Framework Preset | **Other** |
-| Root Directory | **`web`** |
-| Build Command | *(leave empty)* |
-| Output Directory | *(leave empty)* |
+```json
+{
+  "framework": null,
+  "buildCommand": "echo 'static page, nothing to build'",
+  "outputDirectory": "web"
+}
+```
 
-Root Directory is the only field that matters — it stops Vercel from trying to build the
-CLI at the repo root.
+That skips the CLI's `tsc` build and serves `web/` as the site root.
 
-Or from the CLI:
+**Leave Root Directory at the repo root.** Pointing it at `web` puts `vercel.json` out of
+scope, and the output directory then resolves to `web/web` — the deploy fails either way.
+
+Or from the CLI, at the repo root:
 
 ```bash
 npm i -g vercel
-cd web
 vercel --prod
 ```
 

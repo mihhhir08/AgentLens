@@ -1,0 +1,5 @@
+{
+  "framework": null,
+  "buildCommand": "echo 'static page, nothing to build'",
+  "outputDirectory": "web"
+}
